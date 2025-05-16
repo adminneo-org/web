@@ -1,0 +1,35 @@
+# disable directory listing
+Options -Indexes
+
+# allows symbolic links in this directory
+Options +FollowSymLinks
+
+# enable cool URL
+RewriteEngine On
+#RewriteBase /
+
+# front controller
+# Do not process any URL with a file extension (with a dot in the last path component).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule !\.[^/]+$  index.php  [L]
+
+# default charset should be UTF-8
+AddDefaultCharset utf-8
+
+# security headers
+# https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers
+Header set Strict-Transport-Security "max-age=63072000"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1"
+Header set X-Content-Type-Options "nosniff"
+
+# 2 years expiration for static assets
+<FilesMatch "\.(js|css|jpg|png|webp|svg|gif|ico|pdf|woff|woff2)$">
+    Header set Cache-Control "max-age=63158400, public"
+</FilesMatch>
+
+# enable gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
+</IfModule>

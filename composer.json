@@ -1,0 +1,46 @@
+{
+    "name": "adminneo/web",
+    "description": "AdminNeo web page.",
+    "homepage": "https://www.adminneo.org/",
+    "keywords": [
+        "database"
+    ],
+    "support": {
+        "issues": "https://github.com/adminneo-org/web/issues",
+        "forum": "https://github.com/adminneo-org/web/discussions",
+        "source": "https://github.com/adminneo-org/web"
+    },
+    "authors": [
+        {
+            "name": "Peter Knut"
+        }
+    ],
+    "license": [
+        "GPL-3.0-only"
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Gappa/WebLoader.git"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "nette/application": "^3.2",
+        "nette/bootstrap": "^3.2",
+        "nette/caching": "^3.3",
+        "nette/di": "^3.2",
+        "nette/forms": "^3.2",
+        "nette/http": "^3.3",
+        "nette/robot-loader": "^4.0",
+        "nette/utils": "^4.0",
+        "latte/latte": "^3.0",
+        "tracy/tracy": "^2.10",
+        "tedivm/jshrink": "~1.4.0",
+        "wikimedia/less.php": "~3.2.0",
+        "janmarek/webloader": "~6.0.3"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

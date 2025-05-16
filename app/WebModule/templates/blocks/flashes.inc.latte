@@ -1,0 +1,7 @@
+{varType array $flashes}
+
+<div n:if="!empty($flashes)" class="flashes">
+    <div n:foreach="$flashes as $flash" class="alert {$flash->type}" role="alert">
+        {$flash->message|breaklines}
+    </div>
+</div>

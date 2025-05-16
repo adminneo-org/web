@@ -1,0 +1,8 @@
+{
+  "directory": "vendor_bower/",
+  "scripts": {
+    "preinstall": "",
+    "postinstall": "sh bin/packages/bower-post-install.sh",
+    "preuninstall": ""
+  }
+}

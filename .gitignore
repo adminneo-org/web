@@ -1,0 +1,8 @@
+/config/config.local.neon
+/config/environment.php
+/log/*
+/tmp/*
+/public/compiled/*
+/public/files/*
+/vendor_bower
+/vendor

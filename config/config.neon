@@ -1,0 +1,14 @@
+php:
+    date.timezone: Europe/Prague
+    zlib.output_compression: yes
+
+application:
+    mapping:
+        *: *Presenter
+
+di:
+    debugger: true
+
+services:
+    - RouterFactory
+    router: @\RouterFactory::createRouter()

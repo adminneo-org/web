@@ -1,0 +1,7 @@
+{
+  "name": "o2-active",
+  "dependencies": {
+    "nette.ajax.js": "~2.3.0"
+  },
+  "devDependencies": {}
+}

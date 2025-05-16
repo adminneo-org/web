@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="{$baseUrl}/" />
+    <meta property="og:site_name" content="AdminNeo" />
+    <meta property="og:title" content="AdminNeo database manager" />
+    <meta name="description" property="og:description" content="Powerful database manager in a single PHP file." />
+
+
+    <title>{block #title}AdminNeo database management{/block}</title>
+
+    {control css}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {control js}
+
+    <link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+    <div class="page">
+    {block #content}
+        {include "blocks/flashes.inc.latte"}
+    {/block}
+    </div>
+
+    <div class="footer">
+        <p>© {= date("Y")}, AdminNeo.org</p>
+    </div>
+</body>
+</html>
