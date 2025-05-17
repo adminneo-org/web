@@ -12,24 +12,43 @@
     <meta name="description" property="og:description" content="Powerful database manager in a single PHP file." />
 
 
-    <title>{block #title}AdminNeo database management{/block}</title>
+    <title>{block #title}AdminNeo database manager{/block}</title>
 
     {control css}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {control js}
 
-    <link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon"/>
+    {*
+        https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
+        Converting PNG to ICO: https://redketchup.io/icon-converter
+    *}
+    <link rel="icon" type="image/x-icon" href="{$basePath}/favicon.ico" sizes="32x32"/>
+    <link rel="icon" type="image/svg+xml" href="{$basePath}/images/favicon.svg"/>
+    <link rel="apple-touch-icon" href="{$basePath}/images/apple-touch-icon.png"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    {include "blocks/header.inc.latte"}
+
     <div class="page">
-    {block #content}
-        {include "blocks/flashes.inc.latte"}
+    {block #page}
+        <div class="content">
+            {block #content}
+                {include "blocks/flashes.inc.latte"}
+            {/block}
+        </div>
     {/block}
     </div>
 
-    <div class="footer">
-        <p>© {= date("Y")}, AdminNeo.org</p>
+    <div id="footer-anchor"></div>
+    <div id="footer" class="footer">
+        <div class="content">
+            <p>© {= date("Y")}, AdminNeo.org</p>
+        </div>
     </div>
 </body>
 </html>

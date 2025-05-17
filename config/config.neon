@@ -4,11 +4,11 @@ php:
 
 application:
     mapping:
-        *: *Presenter
+        *: *Module\Presenters\*Presenter
 
 di:
     debugger: true
 
 services:
-    - RouterFactory
-    router: @\RouterFactory::createRouter()
+    - Services\RouterFactory
+    router: @\Services\RouterFactory::createRouter()

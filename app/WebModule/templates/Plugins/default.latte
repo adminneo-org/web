@@ -1,0 +1,188 @@
+{block #title}Plugins | {include parent}{/block}
+
+{block #content}
+
+<h1>Plugins</h1>
+<p>
+    AdminNeo and EditorNeo functions can be extended by plugins. The information about <a href="#usage">plugins usage</a>
+    is below.
+</p>
+
+<h3>Authentication and integration</h3>
+<table class="plugins">
+    <tr>
+        <th>IpLoginPlugin</th>
+        <td>Restricts login to given IP address.</td>
+        {include actions plugin => "IpLoginPlugin"}
+    </tr>
+    <tr>
+        <th><a n:href="otpLogin">OtpLoginPlugin</a></th>
+        <td>
+            Adds time-based one-time password authentication to the login form.
+            <a n:href="otpLogin">How to set up OTP.</a>
+        </td>
+        {include actions plugin => "OtpLoginPlugin"}
+    </tr>
+    <tr>
+        <th>ExternalLoginPlugin</th>
+        <td>
+            Authenticates a user by a custom method.<br>
+            This plugin allows integrating AdminNeo with environments that use a single sign-on user authentication.
+            It requires the <a n:href="Configuration:#servers">servers</a> configuration parameter to be set
+            together with the database username and password. If only one server is configured, the user will be
+            automatically logged in.
+        </td>
+        {include actions plugin => "Bz2OutputPlugin"}
+    </tr>
+    <tr>
+        <th>TableLoginPlugin</th>
+        <td>
+            Authenticates a user from the users table.<br>
+            This plugin can be used to manage users access in EditorNeo and/or if connecting to a password-less
+            SQL database.
+        </td>
+        {include actions plugin => "TableLoginPlugin"}
+    </tr>
+    <tr>
+        <th>FrameSupportPlugin</th>
+        <td>
+            Allows using AdminNeo or EditorNeo inside a frame by modifying <code>X-Frame-Options</code> and
+            <code>Content-Security-Policy</code> HTTP headers.
+        </td>
+        {include actions plugin => "FrameSupportPlugin"}
+    </tr>
+</table>
+
+<h3>Data view and editing</h3>
+<table class="plugins">
+    <tr>
+        <th>JsonPreviewPlugin</th>
+        <td>
+            Displays JSON previews in selection table and/or in edit form. Previews will be displayed for columns with
+            native JSON data type and for values that are automatically detected as JSON objects or arrays if
+            <a n:href="Configuration:#jsonValuesDetection">jsonValuesDetection</a> configuration parameter is enabled.
+        </td>
+        {include actions plugin => "JsonPreviewPlugin"}
+    </tr>
+    <tr>
+        <th>FileUploadPlugin</th>
+        <td>
+            Replaces fields ending with "_path" by <code class="jush">&lt;input type="file"&gt;</code> in edit form
+            and displays links to the uploaded files in table select.
+        </td>
+        {include actions plugin => "Bz2OutputPlugin"}
+    </tr>
+    <tr>
+        <th>ForeignEditPlugin</th>
+        <td>Displays selection for fields with a foreign key in edit form.</td>
+        {include actions plugin => "ForeignEditPlugin"}
+    </tr>
+    <tr>
+        <th>SlugifyEditPlugin</th>
+        <td>Prefills field starting with  "slug_" or ending with "_slug" with slugified value of a previous field.</td>
+        {include actions plugin => "SlugifyEditPlugin"}
+    </tr>
+    <tr>
+        <th>TinyMcePlugin</th>
+        <td>
+            Use <a href="https://www.tiny.cloud/docs/tinymce/latest/php-projects/" target="_blank" rel="noopener">TinyMCE 7 editor</a>
+            for all edit fields containing "_html" in their name.
+        </td>
+        {include actions plugin => "TinyMcePlugin"}
+    </tr>
+    <tr>
+        <th>SystemForeignKeysPlugin</th>
+        <td>Links tables by foreign keys in system 'information_schema' and 'mysql' databases.</td>
+        {include actions plugin => "SystemForeignKeysPlugin"}
+    </tr>
+</table>
+
+<h3>Data exporting</h3>
+<table class="plugins">
+    <tr>
+        <th>Bz2OutputPlugin</th>
+        <td>Adds bzip2 compression of data export.</td>
+        {include actions plugin => "Bz2OutputPlugin"}
+    </tr>
+    <tr>
+        <th>ZipOutputPlugin</th>
+        <td>
+            Adds ZIP compression of data export.
+        </td>
+        {include actions plugin => "ZipOutputPlugin"}
+    </tr>
+    <tr>
+        <th>JsonDumpPlugin</th>
+        <td>Adds option to exports table data to JSON format.</td>
+        {include actions plugin => "JsonDumpPlugin"}
+    </tr>
+    <tr>
+        <th>XmlDumpPlugin</th>
+        <td>
+            Adds option to export table data to XML format in a structure<br>
+            <code class="jush-xml">&lt;database name=""&gt;&lt;table name=""&gt;&lt;column name=""&gt;</code>.
+        </td>
+        {include actions plugin => "XmlDumpPlugin"}
+    </tr>
+</table>
+
+<h3>Miscellaneous</h3>
+<table class="plugins">
+    <tr>
+        <th>TranslationPlugin</th>
+        <td>Translates all table and field comments, enum and set values in Editor from the translation table.</td>
+        {include actions plugin => "TranslationPlugin"}
+    </tr>
+    <tr>
+        <th>SqlLogPlugin</th>
+        <td>Logs all queries to SQL file.</td>
+        {include actions plugin => "SqlLogPlugin"}
+    </tr>
+</table>
+
+<h2 id="usage">Usage</h2>
+<ul>
+    <li>
+        Download plugins you want and place them into the <strong>adminneo-plugins</strong> folder in the AdminNeo's
+        current working directory. All plugins in this folder will be autoloaded (but not enabled).
+    </li>
+    <li>Define the list of enabled plugins in <strong>adminneo-plugins.php</strong> file.</li>
+</ul>
+<p>
+    File structure will be:
+</p>
+{var $code = <<<CODE
+- adminneo-plugins
+    - JsonPreviewPlugin.php
+    - XmlDumpPlugin.php
+    - FileUploadPlugin.php
+    - ...
+- adminneo.php
+- adminneo-plugins.php
+CODE}
+<pre><code>{$code}</code></pre>
+<p>You can freely rename adminneo.php to index.php.</p>
+
+<p>The file adminneo-config.php will return the array with plugin instances:</p>
+{var $code = <<<CODE
+<?php
+
+// Enable plugins.
+// Files in `adminneo-plugins` are autoloaded, so it is not necessary to include the source files.
+return [
+    new \AdminNeo\JsonPreviewPlugin(),
+    new \AdminNeo\XmlDumpPlugin(),
+    new \AdminNeo\FileUploadPlugin("data/"),
+    // ...
+];
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+<p>ℹ️ Note: More information about usage of each plugin can be found directly in the source file.</p>
+
+{/block}
+
+{define actions $plugin}
+    <td class="actions">
+        <a href="#todo" title="Download"><svg class="icon solo ic-download"><use href="{$basePath}/images/icons.svg#download"/></svg></a>
+    </td>
+{/define}

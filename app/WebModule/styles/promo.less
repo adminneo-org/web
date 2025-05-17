@@ -1,0 +1,92 @@
+@import "tools";
+
+.promo {
+    background: var(--link-text);
+    overflow: hidden;
+    margin-bottom: 25px;
+    color: var(--body-bg);
+
+    img {
+        margin: 20px 20px 0;
+        width: calc(100% - 40px);
+        max-width: 400px;
+        border-radius: 4px 4px 0 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+}
+
+.promo__headline {
+    margin-top: 25px;
+    font-family: var(--font-family-design);
+    font-size: 20px;
+    font-weight: 200;
+
+    strong {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -1px;
+        line-height: 1.1;
+    }
+}
+
+@media (min-width: 800px) {
+    .promo {
+        margin-bottom: 30px;
+
+        .content {
+            min-height: 260px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        img {
+            position: absolute;
+            bottom: 0;
+            right: 10px;
+            width: 340px;
+        }
+    }
+
+    .promo__headline {
+        font-size: 28px;
+
+        strong {
+            font-size: 40px;
+        }
+    }
+
+    .promo__buttons {
+        margin-top: 25px;
+        font-size: 110%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .promo {
+        margin-bottom: 40px;
+
+        .content {
+            min-height: 320px;
+            padding-top: 30px;
+            padding-bottom: 20px;
+        }
+
+        img {
+            width: 440px;
+        }
+    }
+
+    .promo__headline {
+        font-size: 32px;
+
+        strong {
+            font-size: 48px;
+        }
+    }
+
+    .promo__buttons {
+        margin-top: 30px;
+        font-size: 120%;
+    }
+}

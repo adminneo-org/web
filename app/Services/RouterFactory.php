@@ -1,5 +1,7 @@
 <?php
 
+namespace Services;
+
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 
@@ -18,7 +20,7 @@ class RouterFactory
     {
         $routeList = new RouteList('Web');
 
-        $routeList[] = new Route("<presenter>[/<action>]", "Home:default");
+        $routeList[] = new Route("<presenter>/<action>", "Home:default");
 
         return $routeList;
     }

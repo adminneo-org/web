@@ -1,6 +1,8 @@
 <?php
 
-namespace WebModule;
+declare(strict_types=1);
+
+namespace WebModule\Tools;
 
 class Helpers
 {

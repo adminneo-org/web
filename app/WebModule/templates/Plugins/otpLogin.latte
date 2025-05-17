@@ -1,0 +1,44 @@
+{block #title}OtpLoginPlugin | {include parent}{/block}
+
+{block #content}
+
+<h1>OtpLoginPlugin</h1>
+<p>
+    Adds <a href="https://en.wikipedia.org/wiki/Time-based_one-time_password" target="_blank" rel="noopener">time-based one-time password</a>
+    authentication to the login form. The implementation uses standard SHA1 algorithm, 30s time interval and 6-digits code.
+</p>
+<p>
+    <a href="#TODO" class="button default"><svg class="icon ic-download"><use href="{$basePath}/images/icons.svg#download"/></svg> Download</a>
+</p>
+<h2>Usage</h2>
+<ul>
+    <li>
+        Download the plugin and place it into the <strong>adminneo-plugins</strong> folder in the AdminNeo's
+        current working directory.
+    </li>
+    <li>Add the plugin to the list in <strong>adminneo-plugins.php</strong> file:</li>
+</ul>
+{var $code = <<<CODE
+<?php
+
+// Enable plugins.
+// Files in `adminneo-plugins` are autoloaded, so it is not necessary to include the source files.
+return [
+    new \AdminNeo\OtpLoginPlugin(base64_decode("ENCODED_SECRET")),
+];
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<ul>
+    <li>
+        Add OTP login to your authentication application by scanning this QR code:
+    </li>
+</ul>
+<p>
+    Issuer: AdminNeo<br>
+    User: root<br>
+    TODO: QR code<br>
+</p>
+<p>
+    ℹ️ Note: The unique secret was randomly generated on this server and not stored anywhere.
+</p>

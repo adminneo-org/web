@@ -1,0 +1,120 @@
+{block #title}Download | {include parent}{/block}
+
+{varType array $languages}
+
+{block #content}
+
+<h1>Download</h1>
+<p>TODO form</p>
+
+<h2 id="requirements">Requirements</h2>
+<ul>
+    <li>PHP 5.4+ with enabled sessions, modern web browser.</li>
+    <li>
+        It is also recommended to install
+        <a href="https://www.php.net/manual/en/book.openssl.php" target="_blank" rel="noopener">OpenSSL PHP extension</a>
+        for improved security of stored login information.
+    </li>
+</ul>
+
+<h2 id="security">Security</h2>
+<p>
+    AdminNeo does not allow connecting to databases without a password, and it also rate-limits connection attempts to protect
+    against brute force attacks. However, it is highly recommended to <strong>restrict access to AdminNeo</strong> 🔒 by whitelisting IP
+    addresses allowed to connect to it, by password protecting access in your web server or by enabling security plugins
+    (e.g., to require an OTP).
+</p>
+
+<h2 id="docker">Docker</h2>
+<p>
+    The official Docker image is available at
+    <a href="https://hub.docker.com/r/peterknut/adminneo" target="_blank" rel="noopener">Docker Hub</a>.
+    Please follow the instructions on the Docker page to get started.
+</p>
+
+<h2 id="custom-compilation">Custom compilation</h2>
+<p>
+    Compiling AdminNeo from the source code requires PHP 7.1+ and
+    <a href="https://getcomposer.org/" target="_blank" rel="noopener">Composer</a>.
+</p>
+<ul>
+    <li>Download the source code from <a href="https://github.com/adminneo-org/adminneo" target="_blank" rel="noopener">GitHub page</a>.</li>
+    <li>Run <code>composer install</code> to install dependencies.</li>
+    <li>Run <code>php bin/compile.php</code>:</li>
+</ul>
+<pre><code>php bin/compile.php [project] [drivers] [languages] [themes] [config-file.json]</code></pre>
+
+<p>Where:</p>
+<table class="params">
+    <tr>
+        <th>project</th>
+        <td>One of <code>admin</code> or <code>editor</code>. If not specified, AdminNeo is compiled.</td>
+    </tr>
+    <tr>
+        <th>drivers</th>
+        <td>
+            Comma-separated list of database drivers:
+            <code>mysql</code>, <code>pgsql</code>, <code>mssql</code>, <code>sqlite</code>, <code>oracle</code>,
+            <code>mongo</code>, <code>simpledb</code>, <code>elastic</code>, <code>clickhouse</code>.
+            If not specified, all drivers will be included.
+        </td>
+    </tr>
+    <tr>
+        <th>languages</th>
+        <td>
+            Comma-separated list of language codes: <code>en</code>, <code>de</code>,
+            <code>cs</code>, etc. The full list of available languages can be <a href="#languages">found below</a>.
+            If not specified, all languages will be included.
+        </td>
+    </tr>
+    <tr>
+        <th>themes</th>
+        <td>
+            Comma-separated list of <a href="#TODO">themes</a> together with specific color
+            variant: <code>default-blue</code>, <code>default-red</code>, etc. If color variant is not specified
+            (e.g., <code>default</code>), all color variants will be included. If no theme is specified, the
+            <code>default-blue</code> theme will be included.
+        </td>
+    </tr>
+    <tr>
+        <th>config-file.json</th>
+        <td>
+            Path to the custom JSON configuration file. It contains an object with the same parameters that can be
+            <a n:href="Configuration:">configured</a> in PHP code.
+        </td>
+    </tr>
+</table>
+
+<h3>Examples</h3>
+<p>All drivers, all languages, default-blue theme:</p>
+<pre><code>php bin/compile.php</code></pre>
+
+<p>PostgreSQL driver, EN language, default theme with all color variants:</p>
+<pre><code>php bin/compile.php pgsql en default</code></pre>
+
+<p>MySQL and PostgreSQL drivers, selected languages, default-blue theme:</p>
+<pre><code>php bin/compile.php mysql,pgsql en,de,cs,sk</code></pre>
+
+<p>All drivers, all languages, green and red color variants of the default theme:</p>
+<pre><code>php bin/compile.php default-green,default-red</code></pre>
+
+<p>Custom configuration:</p>
+<pre><code>php bin/compile.php ~/my-config.json</code></pre>
+
+<p>EditorNeo:</p>
+<pre><code>php bin/compile.php editor pgsql en default</code></pre>
+
+<p>JSON configuration file:</p>
+{var $code = <<<CODE
+{
+    "navigationMode": "dual",
+    "preferSelection": true,
+    "recordsPerPage": 70
+}
+CODE}
+<pre><code class="jush-js">{$code}</code></pre>
+
+<h3 id="languages">Languages</h3>
+<table>
+    <tr n:foreach="$languages as $code => $name"><th>{$code}</th><td>{$name}</td></tr>
+</table>

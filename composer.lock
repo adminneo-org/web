@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30f696c18c0a618645a086e8c1dbaeb6",
+    "content-hash": "c8390b32e71a80e9d00cea95c46b2f5d",
     "packages": [
         {
             "name": "janmarek/webloader",
@@ -1324,6 +1324,42 @@
                 "source": "https://github.com/nette/tracy/tree/v2.10.10"
             },
             "time": "2025-04-28T14:35:15+00:00"
+        },
+        {
+            "name": "vrana/jush",
+            "version": "v2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/peterpp/jush.git",
+                "reference": "bddd8a9df2177582426363899fd3b86cdd5e9dd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/peterpp/jush/zipball/bddd8a9df2177582426363899fd3b86cdd5e9dd9",
+                "reference": "bddd8a9df2177582426363899fd3b86cdd5e9dd9",
+                "shasum": ""
+            },
+            "type": "library",
+            "license": [
+                "Apache-2.0",
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Vrána",
+                    "homepage": "https://www.vrana.cz/"
+                }
+            ],
+            "description": "JUSH - JavaScript Syntax Highlighter",
+            "homepage": "https://jush.sourceforge.io/",
+            "keywords": [
+                "javascript",
+                "syntax highlighter"
+            ],
+            "support": {
+                "source": "https://github.com/vrana/jush/"
+            },
+            "time": "2025-03-23T22:20:39+00:00"
         },
         {
             "name": "wikimedia/less.php",

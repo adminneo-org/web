@@ -1,0 +1,46 @@
+@import "tools";
+
+.page {
+    margin-bottom: 20px;
+
+    a[target="_blank"] {
+        padding-right: 1.375em;
+        background: var(--target-arrow) right center no-repeat;
+        background-size: 1.25em;
+
+        &:hover, &:active {
+            background-image: var(--target-arrow-hover);
+        }
+    }
+}
+
+.content {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    background: var(--footer-bg);
+    color: var(--note-text);
+    overflow: hidden;
+    font-size: 14px;
+}
+
+
+@media (min-width: 800px) {
+    .page {
+        margin-bottom: 40px;
+    }
+
+    .content {
+        padding: 0 10px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .page {
+        margin-bottom: 60px;
+    }
+}

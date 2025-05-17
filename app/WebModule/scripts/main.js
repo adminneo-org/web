@@ -3,28 +3,58 @@
 
     $(function() {
         initAnchors();
+        initMenu();
+        initFooter();
         $.nette.init();
+        jush.highlight_tag('code');
         enableInputModifiersOnTouch();
     });
 
-    window.initAnchors = function() {
-        $("a[href^='#']").click(function(event) {
+    window.initMenu = function() {
+        const $menu = $("#menu");
+        const $menuOpen = $("#menu-button .ic-menu");
+        const $menuClose = $("#menu-button .ic-close");
+
+        $("#menu-button").on("click", function(event) {
             event.preventDefault();
 
-            const anchor = $(this).attr('href');
-            const $target = $(anchor);
-            if (!$target.length) {
-                return;
-            }
-
-            const headerHeight = $(".header").height();
-            console.log(headerHeight);
-
-            history.pushState(null, null, anchor);
-            $('html,body').animate({
-                scrollTop: $target.offset().top - headerHeight - 20
-            });
+            $menu.toggle();
+            $menuOpen.toggle();
+            $menuClose.toggle();
         });
+    }
+
+    window.initAnchors = function() {
+        if (location.hash !== "") {
+            scrollToAnchor(location.hash);
+        }
+
+        $("a[href^='#']").on("click", function(event) {
+            event.preventDefault();
+
+            const hash = $(this).attr('href');
+
+            scrollToAnchor(hash, true);
+            window.location.hash = hash;
+        });
+    }
+
+    function scrollToAnchor(hash, smooth = false) {
+        const $target = $(hash);
+        if (!$target.length) {
+            return;
+        }
+
+        const headerHeight = $(".header").height();
+        const position = $target.offset().top - headerHeight - 20;
+
+        if (smooth) {
+            $('html,body').animate({
+                scrollTop: position
+            });
+        } else {
+            window.scrollTo(0, position);
+        }
     }
 
     // Allow :active and :focus styles in Mobile Safari.

@@ -1,0 +1,144 @@
+{block #title}Customizations | {include parent}{/block}
+
+{block #content}
+
+<h1>Customizations</h1>
+<h2 id="custom-css-and-javascript">Custom CSS and JavaScript</h2>
+<p>
+    UI appearance and functionality can be modified by creating a custom CSS or JavaScript file. AdminNeo will
+    automatically include files <strong>adminneo.css</strong>, <strong>adminneo-light.css</strong>,
+    <strong>adminneo-dark.css</strong> and <strong>adminneo.js</strong> that are placed in the AdminNeo's current working
+    directory (typically next to the adminneo.php or index.php).
+</p>
+<ul>
+    <li><strong>adminneo.css</strong> - Should be compatible with automatic switching to dark mode.</li>
+    <li><strong>adminneo-light.css</strong> - Will force AdminNeo to use only the light mode.</li>
+    <li><strong>adminneo-dark.css</strong> - Will force the dark mode.</li>
+</ul>
+<p>ℹ️ Note: Multiple CSS and JS files can be also defined in <a n:href="Configuration:#cssUrls">cssUrls</a> and
+    <a n:href="Configuration:#jsUrls">jsUrls</a> configuration parameters.</p>
+
+<h2 id="advanced-customizations">Advanced customizations</h2>
+<p>
+    It is possible to override methods in the <code>\AdminNeo\Admin</code> class for deeper integration. It can be done in
+    <strong>adminneo-instance.php</strong> file.<br>
+    File structure will be:
+</p>
+{var $code = <<<CODE
+– adminneo.php
+– adminneo-instance.php
+CODE}
+<pre><code>{$code}</code></pre>
+<p>You can freely rename adminneo.php to index.php.</p>
+
+<p>The file adminneo-instance.php will return a custom instance derived from <code>Admin</code>:</p>
+{var $code = <<<CODE
+<?php
+
+class CustomAdmin extends \AdminNeo\Admin
+{
+    public function getServiceTitle()
+    {
+        return "Custom Service";
+    }
+}
+
+// Use factory method to create CustomAdmin instance.
+return CustomAdmin::create();
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<p>
+    Factory method <code>create()</code> accepts also configuration and plugins, so everything can be defined in one
+    adminneo-instance.php file:
+</p>
+{var $code = <<<CODE
+<?php
+
+class CustomAdmin extends \AdminNeo\Admin
+{
+    public function getServiceTitle()
+    {
+        return "Custom Service";
+    }
+}
+
+// Define configuration.
+\$config = [
+    "colorVariant" => "green",
+    "navigationMode": "dual",
+    "preferSelection": true,
+    "recordsPerPage": 70,
+];
+
+// Enable plugins.
+\$plugins = [
+    new \AdminNeo\JsonPreviewPlugin(),
+    new \AdminNeo\XmlDumpPlugin(),
+    new \AdminNeo\FileUploadPlugin("data/"),
+];
+
+// Use factory method to create CustomAdmin instance.
+return CustomAdmin::create(\$config, \$plugins);
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<h3 id="custom-index-php">Custom index.php</h3>
+<p>
+    Another option is to create <code>\AdminNeo\Admin</code> instance inside your own <strong>index.php</strong> file. In this case,
+    implement <code>adminneo_instance()</code> function in the global namespace and include AdminNeo file placed in
+    the <strong>non-public</strong> directory:
+</p>
+{var $code = <<<CODE
+<?php
+
+function adminneo_instance()
+{
+    // Define configuration.
+    \$config = [
+        "colorVariant" => "green",
+    ];
+
+    // Use factory method to create Admin instance.
+    return \AdminNeo\Admin::create(\$config);
+}
+
+// Include AdminNeo file.
+include "/non-public-path/adminneo.php";
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<p>Or with derived class and plugins:</p>
+{var $code = <<<CODE
+<?php
+
+function adminneo_instance()
+{
+    class CustomAdmin extends \AdminNeo\Admin
+    {
+        public function getServiceTitle()
+        {
+            return "Custom Service";
+        }
+    }
+
+    // Define configuration.
+    \$config = [
+        "colorVariant" => "green",
+    ];
+
+    // Enable plugins.
+    \$plugins = [
+        new \AdminNeo\JsonPreviewPlugin(),
+        new \AdminNeo\XmlDumpPlugin(),
+        new \AdminNeo\FileUploadPlugin("data/"),
+    ];
+
+    // Use factory method to create Admin instance.
+    return CustomAdmin::create(\$config, \$plugins);
+}
+
+// Include AdminNeo file.
+include "/non-public-path/adminneo.php";
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>

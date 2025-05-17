@@ -1,0 +1,102 @@
+table {
+	position: relative;
+	margin: 18px 20px;
+	border-spacing: 0;
+	background: var(--table-bg);
+	border: 1px solid var(--table-border);
+
+	&.plugins {
+		width: calc(100% - 40px);
+
+		th {
+			width: 100px;
+		}
+	}
+}
+
+td, th {
+	padding: 10px 10px 8px;
+}
+
+th {
+	background: var(--table-header-bg);
+	text-align: left;
+	white-space: nowrap;
+	font-weight: normal;
+	color: var(--table-header-text);
+
+	&.description {
+		min-width: 400px;
+	}
+}
+
+td {
+	h3, p {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	h3:first-child {
+		margin-top: 10px;
+	}
+
+	p:last-child {
+		margin-bottom: 10px;
+	}
+
+	&.actions {
+		width: 44px;
+	}
+}
+
+tbody th + td, tbody td + th {
+	border-inline-start: 1px solid var(--table-row-border);
+}
+
+thead th, thead td {
+	padding: 6px 10px 4px;
+	background: var(--table-header-bg);
+	border-bottom: 1px solid var(--table-border);
+	font-weight: normal;
+}
+
+tbody th, tbody td {
+	border-bottom: 1px solid var(--table-row-border);
+	vertical-align: baseline;
+}
+
+tbody tr:last-child > th, tbody tr:last-child > td {
+	border-bottom: none;
+}
+
+/* Required to include the right table margin to scrollable area. */
+.scrollable {
+	width: fit-content;
+}
+
+@media (hover: none) {
+	.scrollable {
+		width: auto;
+		overflow-x: auto;
+		margin: -15px 0;
+	}
+}
+
+@media (max-width: 599px) {
+	table.params, table.plugins {
+		display: block;
+
+		tbody, tr, th, td {
+			display: block;
+			width: 100%;
+		}
+
+		th, td {
+			border: none;
+		}
+
+		tr {
+			border-bottom: 1px solid var(--table-row-border);
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{varType array $flashes}
+
+<div class="header">
+    <div class="content">
+        <button id="menu-button" class="header__menu-button button light">
+            <svg class="icon solo ic-menu"><use href="{$basePath}/images/icons.svg#menu"/></svg>
+            <svg class="icon solo ic-close"><use href="{$basePath}/images/icons.svg#close"/></svg>
+        </button>
+
+        <a class="header__logo" n:href="Home:"><img src="{$basePath}/images/adminneo.svg" height="30px" alt="AdminNeo"/></a>
+        <nav id="menu" class="menu">
+            <menu>
+                <li><a n:class="menu__link, $presenter->isLinkCurrent('Download:*') ? active" n:href="Download:">Download</a></li>
+                <li><a n:class="menu__link, $presenter->isLinkCurrent('Configuration:*') ? active" n:href="Configuration:">Configuration</a></li>
+                <li><a n:class="menu__link, $presenter->isLinkCurrent('Plugins:*') ? active" n:href="Plugins:">Plugins</a></li>
+                <li><a n:class="menu__link, $presenter->isLinkCurrent('Customizations:*') ? active" n:href="Customizations:">Customizations</a></li>
+                <li><a n:class="menu__link, $presenter->isLinkCurrent('Editor:*') ? active" n:href="Editor:">EditorNeo</a></li>
+            </menu>
+        </nav>
+        <a class="header__icon" href="https://github.com/adminneo-org/adminneo" target="_blank" rel="noopener">
+            <img src="{$basePath}/images/github-mark.svg" height="24px" alt="GitHub" title="GitHub"/>
+        </a>
+    </div>
+</div>

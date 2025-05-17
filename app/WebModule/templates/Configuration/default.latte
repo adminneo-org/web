@@ -1,0 +1,539 @@
+{block #title}Configuration | {include parent}{/block}
+
+{block #content}
+
+<h1>Configuration</h1>
+<p>
+    Configuration can be defined in <strong>adminneo-config.php</strong> file placed in the AdminNeo's current working
+    directory.<br>
+    A simple file structure will be:
+</p>
+{var $code = <<<CODE
+– adminneo.php
+– adminneo-config.php
+CODE}
+<pre><code>{$code}</code></pre>
+<p>You can freely rename adminneo.php to index.php.</p>
+
+<p>The file adminneo-config.php will return the configuration array:</p>
+{var $code = <<<CODE
+<?php
+
+// Define configuration.
+return [
+    "colorVariant" => "green",
+    "navigationMode": "dual",
+    "preferSelection": true,
+    "recordsPerPage": 70,
+];
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<h2 id="parameters">Parameters</h2>
+<p>
+    All parameters available in AdminNeo are listed in the following table. Parameters available in EditorNeo are
+    labeled in the Editor column.
+</p>
+<div class="scrollable">
+    <table>
+        <thead>
+            <tr><th>Parameter</th><th>Default</th><th>Editor</th><th class="description">Description</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                {include paramLine name => "theme", defaultValue => "default"}
+                <td>Theme code. Available themes are: <code>default</code>.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "colorVariant", defaultValue => "blue"}
+                <td>Theme color variant. Available variants are: <code>blue</code>, <code>green</code>, <code>red</code>.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "cssUrls", defaultValue => "[]"}
+                <td>List of custom CSS files.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "jsUrls", defaultValue => "[]"}
+                <td>List of custom JavaScript files.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "navigationMode", defaultValue => "simple", inEditor => false}
+                <td>Main navigation mode that affects the left menu with the list of tables and top links:
+                    <code>simple</code>, <code>dual</code>, <code>reversed</code>.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "preferSelection", defaultValue => "false", inEditor => false}
+                <td>Whether data selection is the primary action for all table links.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "jsonValuesDetection", defaultValue => "false", inEditor => false}
+                <td>Whether to detect JSON objects and arrays in text columns.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "jsonValuesAutoFormat", defaultValue => "false", inEditor => false}
+                <td>Whether to automatically format JSON values while editing.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "enumAsSelectThreshold", defaultValue => "5"}
+                <td>Threshold for displaying <code>&lt;select&gt;</code> for <code>enum</code> fields instead of radio
+                    list in edit form.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "recordsPerPage", defaultValue => "50"}
+                <td>Number of selected records per one page.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "versionVerification", defaultValue => "true"}
+                <td>Whether verification of the new AdminNeo's version is enabled.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "hiddenDatabases", defaultValue => "[]", inEditor => false}
+                <td>List of databases to hide from the UI. Value <code>__system</code> will be expanded to all system
+                    databases. Access to these databases will be not restricted.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "hiddenSchemas", defaultValue => "[]", inEditor => false}
+                <td>List of schemas to hide from the UI. Value <code>__system</code> will be expanded to all system
+                    databases. Access to these databases will be not restricted.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "visibleCollations", defaultValue => "[]", inEditor => false}
+                <td>List of collations to keep in select boxes while editing databases or tables.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "visibleCollations", defaultValue => "null"}
+                <td>Default driver for login form.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "defaultPasswordHash", defaultValue => "null"}
+                <td>Hash of the default password for authentication to password-less databases. Set to an empty
+                    string to allow connection without password.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "sslKey", defaultValue => "null"}
+                <td>MySQL: The path name to the SSL key file.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "sslCertificate", defaultValue => "null"}
+                <td>MySQL: The path name to the certificate file.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "sslCaCertificate", defaultValue => "null"}
+                <td>MySQL: The path name to the certificate authority file.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "sslTrustServerCertificate", defaultValue => "null"}
+                <td>MySQL, MS SQL: Whether to trust server certificate. Values: <code>true</code>, <code>false</code>,
+                    <code>null</code>.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "sslEncrypt", defaultValue => "null"}
+                <td>MS SQL: Whether the communication is encrypted. Values: <code>true</code>, <code>false</code>,
+                    <code>null</code>.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "sslMode", defaultValue => "null"}
+                <td>PostgreSQL: Value for
+                    <a href="https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE" target="_blank" rel="noopener">sslmode connection parameter</a>.</td>
+            </tr>
+            <tr>
+                {include paramLine name => "servers", defaultValue => "[]", inEditor => false}
+                <td>List of predefined server connections.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 id="theme">theme</h3>
+<ul>
+    <li>Default value: <code>default</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    Theme code. Available themes are: <code>default</code>. Make sure that the theme is compiled into the final single file. If the
+    theme is not found, the default theme will be used.
+</p>
+
+<h3 id="colorVariant">colorVariant</h3>
+<ul>
+    <li>Default value: <code>blue</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    Theme color code. Available variants are: <code>blue</code>, <code>green</code>, <code>red</code>. Make sure that
+    the color variant is compiled into the final single file together with the selected theme. If the color variant
+    is not found, blue color will be used.
+</p>
+
+<h3 id="cssUrls">cssUrls</h3>
+<ul>
+    <li>Default value: <code>[]</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    List of custom CSS files. For example:
+</p>
+{var $code = <<<CODE
+"cssUrls" => [
+    "custom.css",
+    "https://www.myservice.com/adminneo.css",
+],
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+<p>ℹ️ Note: It is also possible to use autoloaded <strong>adminneo.css</strong> file for basic
+    <a n:href="Customizations:#custom-css-and-javascript">UI modifications</a>.</p>
+
+<h3 id="jsUrls">jsUrls</h3>
+<ul>
+    <li>Default value: <code>[]</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    List of custom JavaScript files. For example:
+</p>
+{var $code = <<<CODE
+"cssUrls" => [
+    "custom.js",
+    "https://www.myservice.com/adminneo.js",
+],
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+    <p>ℹ️ Note: It is also possible to use autoloaded <strong>adminneo.js</strong> file for basic
+        <a n:href="Customizations:#custom-css-and-javascript">UI modifications</a>.</p>
+
+<h3 id="navigationMode">navigationMode</h3>
+<ul>
+    <li>Default value: <code>simple</code></li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    Main navigation mode that affects the left menu with the list of tables and main navigation links.
+</p>
+<table class="params">
+    <tr><th>simple</th><td>Only one primary link is displayed in the left menu.</td></tr>
+    <tr><th>dual</th><td>Both primary link and secondary icon are displayed in the left menu.</td></tr>
+    <tr><th>reversed</th><td>Dual mode with reversed order of the primary link and secondary icon.</td></tr>
+</table>
+
+<h3 id="preferSelection">preferSelection</h3>
+<ul>
+    <li>Default value: <code>false</code></li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    Whether data selection is the primary action for all table links. This also affects the order of main navigation
+    links to be consistent with the left menu.
+</p>
+
+<h3 id="jsonValuesDetection">jsonValuesDetection</h3>
+<ul>
+    <li>Default value: <code>false</code></li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    Whether to detect JSON objects and arrays in text columns. Detected JSON values will be displayed with syntax
+    highlighting.
+</p>
+
+<h3 id="jsonValuesAutoFormat">jsonValuesAutoFormat</h3>
+<ul>
+    <li>Default value: <code>false</code></li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    Whether to automatically format JSON values while editing. JSON values will be pretty-formatted in edit fields and
+    minified before writing to database.
+</p>
+
+<h3 id="enumAsSelectThreshold">enumAsSelectThreshold</h3>
+<ul>
+    <li>Default value: <code>false</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    Threshold for displaying <code>&lt;select&gt;</code> for <code>enum</code> fields instead of radio list in edit form.
+    If the number of enum values is greater than this threshold, select will be used. Set <code>null</code> to disable
+    the threshold.
+</p>
+
+<h3 id="recordsPerPage">recordsPerPage</h3>
+<ul>
+    <li>Default value: <code>50</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    The default number of selected records per one page.
+</p>
+
+<h3 id="versionVerification">versionVerification</h3>
+<ul>
+    <li>Default value: <code>true</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    Whether verification of the new AdminNeo's version is enabled.
+</p>
+
+<h3 id="hiddenDatabases">hiddenDatabases</h3>
+<ul>
+    <li>Default value: <code>[]</code></li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    List of databases to hide from the UI. Value <code>__system</code> will be expanded to all system databases for the
+    current driver. The <code>*</code> character can be used as a wildcard.
+</p>
+<p>
+    ⚠️ Warning: Access to these databases is not restricted. They can be still selected by modifying URL parameters.
+</p>
+<p>
+    For example:
+</p>
+{var $code = <<<CODE
+"hiddenDatabases" => ["__system", "some_other_database"],
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<h3 id="hiddenSchemas">hiddenSchemas</h3>
+<ul>
+    <li>Default value: <code>[]</code></li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    List of schemas to hide from the UI. Value <code>__system</code> will be expanded to all system schemas for the
+    current driver. The <code>*</code> character can be used as a wildcard.
+</p>
+<p>
+    ⚠️ Warning: Access to these schemas is not restricted. They can be still selected by modifying URL parameters.
+</p>
+<p>
+    For example:
+</p>
+{var $code = <<<CODE
+"hiddenSchemas" => ["__system", "some_other_schema"],
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<h3 id="visibleCollations">visibleCollations</h3>
+<ul>
+    <li>Default value: <code>[]</code> (no filtering is applied)</li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    List of collations to keep in the select box when editing databases or tables. The <code>*</code> character can be
+    used as a wildcard. If an existing table or row uses a different collation, it will also be preserved in the select
+    box.
+</p>
+<p>
+    ℹ️ Note: Access to other collations is not restricted.
+</p>
+<p>
+    For example:
+</p>
+{var $code = <<<CODE
+"visibleCollations" => ["ascii_general_ci", "utf8mb4*czech*ci"],
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+
+<h3 id="defaultDriver">defaultDriver</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    Default driver for login form. Given value is validated against available drivers. If driver is not set or is
+    invalid, the first available driver will be used.
+</p>
+
+<h3 id="defaultPasswordHash">defaultPasswordHash</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    By default, AdminNeo does not allow access to a database without a password. This affects password-less databases
+    such as SQLite, SimpleDB or Elasticsearch. In this parameter, you can specify a hash of the default password to
+    enable internal authentication. The given password will be validated by AdminNeo and not passed to the database
+    itself.
+</p>
+<p>
+    Set to an empty string to allow connection without a password.
+</p>
+<p>
+    ⚠️ Warning: Use disabling default password on your own risk and put other sufficient safety measures in place.
+</p>
+<p>
+    ℹ️ Note: Custom password verification requires PHP 5.5. With PHP 5.4, it is only possible to disable the password.
+</p>
+
+<h3 id="sslKey">sslKey</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    MySQL: The path name to the SSL key file.
+</p>
+
+<h3 id="sslCertificate">sslCertificate</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    MySQL: The path name to the certificate file.
+</p>
+
+<h3 id="sslCaCertificate">sslCaCertificate</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    MySQL: The path name to the certificate authority file.
+</p>
+
+<h3 id="sslTrustServerCertificate">sslTrustServerCertificate</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    MySQL, MS SQL: Whether to trust server certificate. Values: <code>true</code>, <code>false</code>
+    or <code>null</code> (for not setting the corresponding parameter).
+</p>
+
+<h3 id="sslEncrypt">sslEncrypt</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    MS SQL: Whether the communication is encrypted. Values: <code>true</code>, <code>false</code>
+    or <code>null</code> (for not setting the corresponding parameter).
+</p>
+
+<h3 id="sslMode">sslMode</h3>
+<ul>
+    <li>Default value: <code>null</code></li>
+    <li>Available in EditorNeo: YES</li>
+</ul>
+<p>
+    PostgreSQL: Value for
+    <a href="https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE" target="_blank" rel="noopener">sslmode connection parameter</a>.
+</p>
+
+<h3 id="servers">servers</h3>
+<ul>
+    <li>Default value: <code>[]</code></li>
+    <li>Available in EditorNeo: no</li>
+</ul>
+<p>
+    List of predefined server connections. Each server connection has parameters:
+</p>
+<div class="scrollable">
+    <table>
+        <thead>
+            <tr><th>Parameter</th><th>Required</th><th class="description">Description</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>driver</th>
+                <td>YES</td>
+                <td>Driver code: <code>mysql</code>, <code>pgsql</code>, <code>mssql</code>, <code>sqlite</code>, <code>oracle</code>,
+                    <code>mongo</code>, <code>simpledb</code>, <code>elastic</code>, <code>clickhouse</code>.</td>
+            </tr>
+            <tr>
+                <th>server</th>
+                <td>no</td>
+                <td>Server address.</td>
+            </tr>
+            <tr>
+                <th>database</th>
+                <td>no</td>
+                <td>Database name, or file path to SQLite file.</td>
+            </tr>
+            <tr>
+                <th>name</th>
+                <td>no</td>
+                <td>Custom server name.</td>
+            </tr>
+            <tr>
+                <th>username</th>
+                <td>no</td>
+                <td>Database user that will be used to log in.</td>
+            </tr>
+            <tr>
+                <th>password</th>
+                <td>no</td>
+                <td>Database user's password.</td>
+            </tr>
+            <tr>
+                <th>config</th>
+                <td>no</td>
+                <td>Configuration parameters that overrides global config.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>
+    For example:
+</p>
+{var $code = <<<CODE
+"servers" => [
+    [
+        "driver" => "mysql",
+        "name" => "Devel DB",
+        "config" => ["colorVariant" => "green"],
+    ],
+    [
+        "driver" => "pgsql",
+        "server" => "localhost:5432",
+        "database" => "postgres",
+    ],
+    [
+        "driver" => "sqlite",
+        "database" => "/projects/my-service/test.db",
+        "config" => ["defaultPasswordHash" => ""],
+    ],
+],
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+<p>
+    It is also possible to define custom server keys. This is needed to properly distinguish between multiple
+    connections to the same server.
+</p>
+{var $code = <<<CODE
+"servers" => [
+    "service1" => [
+        "driver" => "mysql",
+        "name" => "Service 1",
+        "database" => "service1",
+    ],
+    "service2" => [
+        "driver" => "mysql",
+        "name" => "Service 2",
+        "database" => "service2",
+    ],
+],
+CODE}
+<pre><code class="jush-php">{$code}</code></pre>
+<p>
+    Username and password are used to log in to the database if the login form is submitted with empty credentials.
+    This can be used to:
+</p>
+<ul>
+    <li>simplify the login process on a development environment,</li>
+    <li>provide the credentials for <strong>ExternalLoginPlugin</strong>.</li>
+</ul>
+<p>
+    ℹ️ Note: Global configuration parameter <code>servers</code> can't be overridden by a server connection.
+</p>
+
+{/block}
+
+{define paramLine string $name, string $defaultValue, bool $inEditor = true}
+    <th><a href="#{$name}">{$name}</a></th>
+    <td><code>{$defaultValue}</code></td>
+    <td>{if $inEditor}YES{else}no{/if}</td>
+{/define}
