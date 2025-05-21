@@ -1,3 +1,6 @@
+{varType string $encodedSecret}
+{varType string $qrCodeData}
+
 {block #title}OtpLoginPlugin | {include parent}{/block}
 
 {block #content}
@@ -21,10 +24,9 @@
 {var $code = <<<CODE
 <?php
 
-// Enable plugins.
 // Files in `adminneo-plugins` are autoloaded, so it is not necessary to include the source files.
 return [
-    new \AdminNeo\OtpLoginPlugin(base64_decode("ENCODED_SECRET")),
+    new \AdminNeo\OtpLoginPlugin(base64_decode("{$encodedSecret}")),
 ];
 CODE}
 <pre><code class="jush-php">{$code}</code></pre>
@@ -34,11 +36,10 @@ CODE}
         Add OTP login to your authentication application by scanning this QR code:
     </li>
 </ul>
-<p>
-    Issuer: AdminNeo<br>
-    User: root<br>
-    TODO: QR code<br>
+<p id="qr-code" class="qr-code">
+    <img src="{$qrCodeData|nocheck}" width="246" height="246" alt="QR code for OTP login"/>
 </p>
+{control qrCodeForm}
 <p>
     ℹ️ Note: The unique secret was randomly generated on this server and not stored anywhere.
 </p>
