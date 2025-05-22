@@ -20,6 +20,7 @@ class RouterFactory
     {
         $routeList = new RouteList('Web');
 
+        $routeList[] = new Route("files/v<version>/<options [^_]*_[^_]*_[^_]*>/<project admin|editor>neo-<version2>.php", "Download:file");
         $routeList[] = new Route("<presenter>/<action>", "Home:default");
 
         return $routeList;

@@ -81,4 +81,38 @@
         }
     };
 
+    window.initDownloadForm = function(colorVariants) {
+        const colorPattern = "(" + colorVariants.join("|") + ")";
+        const $checks = $("#download-themes input");
+
+        $checks.each(function(index, check) {
+            if (!check.value.match(`-${colorPattern}$`)) {
+                check.parentElement.classList.add("options-list__main");
+            }
+        });
+
+        $checks.on("click", function(event) {
+            const target = event.target;
+
+            let matches = target.value.match(`^(.+)-${colorPattern}$`);
+            if (matches) {
+                let allChecked = true;
+                $checks.each(function(index, check) {
+                    if (check.value.match(`-${colorPattern}$`)) {
+                        allChecked = allChecked && check.checked;
+                    }
+                });
+
+                if (!allChecked) {
+                    $checks.filter(`input[value=${matches[1]}]`)[0].checked = false;
+                }
+            } else {
+                $checks.each(function(index, check) {
+                    if (check.value.match(`${target.value}-${colorPattern}$`)) {
+                        check.checked = target.checked;
+                    }
+                });
+            }
+        });
+    }
 })();

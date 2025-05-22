@@ -1,11 +1,16 @@
-{block #title}Download | {include parent}{/block}
-
 {varType array $languages}
+{varType array $colorVariants}
+
+{block #title}Download | {include parent}{/block}
 
 {block #content}
 
 <h1>Download</h1>
-<p>TODO form</p>
+
+{control downloadForm}
+<script>
+    initDownloadForm({$colorVariants});
+</script>
 
 <h2 id="requirements">Requirements</h2>
 <ul>

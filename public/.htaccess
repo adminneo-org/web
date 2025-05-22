@@ -9,6 +9,10 @@ RewriteEngine On
 #RewriteBase /
 
 # front controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule files/.*\.php$  index.php  [L]
+
 # Do not process any URL with a file extension (with a dot in the last path component).
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

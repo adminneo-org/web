@@ -1,0 +1,43 @@
+#frm-downloadForm {
+    width: 100%;
+
+    table {
+        width: calc(100% - 40px);
+    }
+
+    th {
+        width: 50px;
+    }
+}
+
+#download-drivers, #download-languages, #download-themes {
+    th, td {
+        padding-top: 0;
+    }
+
+    .options-list {
+        display: block;
+        padding: 5px 10px;
+        background: var(--table-header-bg);
+        border: 1px solid var(--table-border);
+        border-radius: var(--box-border-radius);
+        columns: 8rem auto;
+        column-gap: 20px;
+
+        label {
+            display: block;
+        }
+    }
+
+    .options-list__main {
+        column-span: all;
+    }
+}
+
+@media (max-width: 599px) {
+    #download-drivers, #download-languages, #download-themes {
+        th {
+            display: none;
+        }
+    }
+}

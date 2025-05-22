@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8765801db33b3761cbb416529382e62b",
+    "content-hash": "26aba36c32e8dc890f5c97dd48e01ac0",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1221,6 +1221,74 @@
                 "source": "https://github.com/nette/routing/tree/v3.1.1"
             },
             "time": "2024-11-04T11:59:47+00:00"
+        },
+        {
+            "name": "nette/safe-stream",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/safe-stream.git",
+                "reference": "49a4924a761b053259a720633808305178376443"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/safe-stream/zipball/49a4924a761b053259a720633808305178376443",
+                "reference": "49a4924a761b053259a720633808305178376443",
+                "shasum": ""
+            },
+            "require": {
+                "php": "8.0 - 8.4"
+            },
+            "require-dev": {
+                "nette/tester": "^2.4",
+                "phpstan/phpstan": "^2",
+                "tracy/tracy": "^2.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/loader.php"
+                ],
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "Nette SafeStream: provides isolation for thread safe manipulation with files via native PHP functions.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "atomic",
+                "filesystem",
+                "isolation",
+                "nette",
+                "safe",
+                "thread safe"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/safe-stream/issues",
+                "source": "https://github.com/nette/safe-stream/tree/v3.0.2"
+            },
+            "time": "2025-01-01T21:32:26+00:00"
         },
         {
             "name": "nette/schema",
